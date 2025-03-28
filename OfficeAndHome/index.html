@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HappyHome - Cho thuê nhà ở & văn phòng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-home me-2"></i>HappyHome
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#houses">Nhà ở</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#offices">Văn phòng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Giới thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Liên hệ</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2" id="loginAdminBtn">
+                        <i class="fas fa-user-plus me-1"></i>Quản lý
+                    </button>
+                    <button class="btn btn-outline-light" id="loginBtn">
+                        <i class="fas fa-user me-1"></i>Đăng nhập
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-md-8 text-white">
+                    <h1 class="display-4 fw-bold mb-4">Tìm ngôi nhà mơ ước của bạn</h1>
+                    <p class="lead mb-5">Hơn 1000+ bất động sản cao cấp đang chờ bạn khám phá</p>
+                    <a href="#search" class="btn btn-primary btn-lg px-4 me-2">
+                        <i class="fas fa-search me-1"></i>Tìm kiếm ngay
+                    </a>
+                    <a href="#featured" class="btn btn-outline-light btn-lg px-4">
+                        <i class="fas fa-home me-1"></i>Xem bất động sản
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section py-5 bg-light" id="search">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="mb-4 text-center">Tìm kiếm bất động sản phù hợp</h3>
+                            <form id="searchForm">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="propertyType" class="form-label">Loại hình</label>
+                                        <select class="form-select" id="propertyType">
+                                            <option value="all">Tất cả</option>
+                                            <option value="house">Nhà ở</option>
+                                            <option value="office">Văn phòng</option>
+                                            <option value="apartment">Căn hộ</option>
+                                            <option value="villa">Biệt thự</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="location" class="form-label">Địa điểm</label>
+                                        <select class="form-select" id="location">
+                                            <option value="all">Toàn quốc</option>
+                                            <option value="hanoi">Hà Nội</option>
+                                            <option value="hcm">TP.Hồ Chí Minh</option>
+                                            <option value="danang">Đà Nẵng</option>
+                                            <option value="nhatrang">Nha Trang</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="priceRange" class="form-label">Mức giá</label>
+                                        <select class="form-select" id="priceRange">
+                                            <option value="all">Tất cả</option>
+                                            <option value="1">Dưới 5 triệu</option>
+                                            <option value="2">5 - 10 triệu</option>
+                                            <option value="3">10 - 20 triệu</option>
+                                            <option value="4">20 - 30 triệu</option>
+                                            <option value="5">Trên 30 triệu</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 text-center mt-3">
+                                        <button type="submit" class="btn btn-primary px-4 py-2">
+                                            <i class="fas fa-search me-2"></i>Tìm kiếm
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="property-listing py-5" id="featured">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="section-title">Bất động sản nổi bật</h2>
+                <a href="#" class="btn btn-outline-primary">Xem tất cả</a>
+            </div>
+            <div class="row" id="featuredPropertyList">
+                <!-- Featured properties will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Types -->
+    <section class="property-types py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Loại hình bất động sản</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="card type-card h-100 border-0 shadow-sm">
+                        <img src="/assets/images/nha_o.jpg" class="card-img-top" alt="Nhà ở">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Nhà ở</h5>
+                            <p class="card-text">120+ bất động sản</p>
+                            <a href="#houses" class="btn btn-outline-primary">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card type-card h-100 border-0 shadow-sm">
+                        <img src="/assets/images/canho.jpg" class="card-img-top" alt="Căn hộ">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Căn hộ</h5>
+                            <p class="card-text">85+ bất động sản</p>
+                            <a href="#" class="btn btn-outline-primary">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card type-card h-100 border-0 shadow-sm">
+                        <img src="/assets/images/bietthu.jpg" class="card-img-top" alt="Biệt thự">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Biệt thự</h5>
+                            <p class="card-text">45+ bất động sản</p>
+                            <a href="#" class="btn btn-outline-primary">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card type-card h-100 border-0 shadow-sm">
+                        <img src="/assets/images/vanphongdnu.jpg" class="card-img-top" alt="Văn phòng">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Văn phòng</h5>
+                            <p class="card-text">75+ bất động sản</p>
+                            <a href="#offices" class="btn btn-outline-primary">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Houses Section -->
+    <section class="property-listing py-5" id="houses">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="section-title">Nhà ở cho thuê</h2>
+                <a href="#" class="btn btn-outline-primary">Xem tất cả</a>
+            </div>
+            <div class="row" id="housePropertyList">
+                <!-- House properties will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Offices Section -->
+    <section class="property-listing py-5 bg-light" id="offices">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="section-title">Văn phòng cho thuê</h2>
+                <a href="#" class="btn btn-outline-primary">Xem tất cả</a>
+            </div>
+            <div class="row" id="officePropertyList">
+                <!-- Office properties will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Khách hàng nói gì về chúng tôi</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="mb-3 text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="card-text mb-4">"Tôi đã tìm được ngôi nhà ưng ý chỉ sau 2 ngày sử dụng dịch vụ. Cảm ơn HappyHome rất nhiều!"</p>
+                            <div class="d-flex align-items-center">
+                                <img src="/assets/images/toclachuoi.jpg" class="rounded-circle me-3" width="50" alt="Customer">
+                                <div>
+                                    <h6 class="mb-0">Anh Nguyễn Quang Đạt</h6>
+                                    <small class="text-muted">Nhân viên văn phòng</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="mb-3 text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="card-text mb-4">"Dịch vụ chuyên nghiệp, nhân viên tư vấn nhiệt tình. Tôi sẽ giới thiệu cho bạn bè sử dụng."</p>
+                            <div class="d-flex align-items-center">
+                                <img src="/assets/images/khoabug.jpg" class="rounded-circle me-3" width="50" alt="Customer">
+                                <div>
+                                    <h6 class="mb-0">Anh Nguyễn Đức Khoa</h6>
+                                    <small class="text-muted">Doanh nhân</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="mb-3 text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="card-text mb-4">"Văn phòng tôi thuê qua HappyHome rất đẹp và đúng với mô tả. Giá cả hợp lý, thủ tục nhanh gọn."</p>
+                            <div class="d-flex align-items-center">
+                                <img src="/assets/images/vuthingochan.jpg" class="rounded-circle me-3" width="50" alt="Customer">
+                                <div>
+                                    <h6 class="mb-0">Chị Vũ Thị Ngọc Hân</h6>
+                                    <small class="text-muted">Giám đốc công ty</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section py-5 bg-light" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="/assets/images/toi.jpg" class="img-fluid rounded shadow">
+                    
+                        <p><h5 class="card-title mb-3">Về Tôi</h5></p>
+                        <p>Xin chào, tôi là Nghiêm Minh Phúc, chuyên gia trong lĩnh vực tra cứu và tư vấn thông tin về nhà ở, căn hộ và văn phòng cho thuê.</p>
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Tìm kiếm nhà ở, căn hộ hoặc văn phòng phù hợp với nhu cầu và ngân sách.</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Cung cấp thông tin chi tiết về vị trí, tiện ích và giá cả thị trường.</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i>Hỗ trợ tư vấn hợp đồng, thủ tục thuê/mua bất động sản.</li>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="section-title mb-4">Về HappyHome</h2>
+                    <p class="lead">Chúng tôi kết nối bạn với ngôi nhà mơ ước</p>
+                    <p>HappyHome là nền tảng kết nối chủ nhà và người có nhu cầu thuê nhà uy tín hàng đầu Việt Nam. Với hơn 5 năm kinh nghiệm trong lĩnh vực bất động sản, chúng tôi tự hào mang đến giải pháp tìm kiếm nhà ở và văn phòng tối ưu nhất.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Hơn 1000+ bất động sản chất lượng</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Đội ngũ tư vấn chuyên nghiệp</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Thông tin minh bạch, chính xác</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> Hỗ trợ 24/7</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary mt-3">Liên hệ ngay</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section py-5" id="contact">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Liên hệ với chúng tôi</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Thông tin liên hệ</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                                    <strong>Địa chỉ:</strong> Khu đô thị Kiến Hưng Luxury, Hà Đông, Hà Nội
+                                <li class="mb-3">
+                                    <i class="fas fa-phone text-primary me-2"></i>
+                                    <strong>Điện thoại:</strong> 0976 420 203
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-envelope text-primary me-2"></i>
+                                    <strong>Email:</strong> phucdzys2006@gmail.com
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-clock text-primary me-2"></i>
+                                    <strong>Giờ làm việc:</strong> Thứ 2 - Thứ 7: 8:00 - 20:00
+                                </li>
+                            </ul>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Gửi tin nhắn</h5>
+                            <form id="contactForm">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Họ và tên" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" placeholder="Email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="tel" class="form-control" placeholder="Số điện thoại">
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control" rows="4" placeholder="Nội dung" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-paper-plane me-2">Gửi tin nhắn</i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">
+                        <i class="fas fa-home me-2"></i>HappyHome
+                    </h5>
+                    <p>Kết nối bạn với ngôi nhà mơ ước. Hệ thống bất động sản uy tín hàng đầu Việt Nam.</p>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5 class="mb-3">Liên kết</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white">Trang chủ</a></li>
+                        <li class="mb-2"><a href="#houses" class="text-white">Nhà ở</a></li>
+                        <li class="mb-2"><a href="#offices" class="text-white">Văn phòng</a></li>
+                        <li class="mb-2"><a href="#about" class="text-white">Giới thiệu</a></li>
+                        <li class="mb-2"><a href="#contact" class="text-white">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-3">Hỗ trợ</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white">Câu hỏi thường gặp</a></li>
+                        <li class="mb-2"><a href="#" class="text-white">Chính sách bảo mật</a></li>
+                        <li class="mb-2"><a href="#" class="text-white">Điều khoản sử dụng</a></li>
+                        <li class="mb-2"><a href="#" class="text-white">Hướng dẫn đăng tin</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5 class="mb-3">Đăng ký nhận tin</h5>
+                    <p>Nhận thông báo về bất động sản mới nhất qua email</p>
+                    <form class="mb-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Email của bạn">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 HappyHome.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">Made with <i class="fas fa-heart text-danger"></i> in Vietnam</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Property Detail Modal -->
+    <div class="modal fade" id="propertyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="propertyModalTitle">Chi tiết bất động sản</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="propertyModalBody">
+                    <!-- Content will be loaded via JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-phone me-2"></i>Liên hệ ngay
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đăng nhập</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Ghi nhớ đăng nhập</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">Đăng nhập</button>
+                        <div class="text-center">
+                            <a href="#" class="text-decoration-none">Quên mật khẩu?</a>
+                            <p class="mt-2">Bạn chưa có tài khoản? <a href="#" class="text-primary">Đăng ký ngay</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Admin Modal -->
+    <div class="modal fade" id="loginAdminModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đăng nhập Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginAdminForm">
+                        <div class="mb-3">
+                            <label for="loginAdminEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginAdminEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginAdminPassword" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" id="loginAdminPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberAdmin">
+                            <label class="form-check-label" for="rememberAdmin">Ghi nhớ đăng nhập</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">Đăng nhập Admin</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+
+    <!-- jQuery, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/app.js"></script>
+</body>
+</html>

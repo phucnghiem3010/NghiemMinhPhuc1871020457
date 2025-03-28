@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản trị - HappyHome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background-color: #212529;
+        }
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.75);
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .sidebar .nav-link i {
+            width: 20px;
+            margin-right: 8px;
+            text-align: center;
+        }
+        .main-content {
+            background-color: #f8f9fa;
+        }
+        .dashboard-card {
+            border-radius: 10px;
+            transition: all 0.3s;
+            border: none;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .table th {
+            white-space: nowrap;
+        }
+        .property-thumb {
+            width: 50px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+        .active-thumb {
+            border: 2px solid #0d6efd;
+        }
+        #imagePreview img {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #imagePreview img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar p-0">
+                <div class="p-3 text-white text-center">
+                    <h4 class="mb-0">
+                        <i class="fas fa-home me-2"></i>HappyHome
+                    </h4>
+                    <small class="text-muted">Quản trị hệ thống</small>
+                    <hr class="bg-light mt-2">
+                </div>
+                <ul class="nav flex-column p-2">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#dashboardContent" data-target="dashboard">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#propertiesContent" data-target="properties">
+                            <i class="fas fa-home"></i> Bất động sản
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#addPropertyContent" data-target="addProperty">
+                            <i class="fas fa-plus-circle"></i> Thêm mới
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-users"></i> Người dùng
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-file-invoice-dollar"></i> Giao dịch
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-cog"></i> Cài đặt
+                        </a>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <button class="nav-link btn btn-danger text-white" id="GotoHomePage">
+                            <i class="fas fa-sign-out-alt"></i> Về trang chủ
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-10 main-content p-0">
+                <!-- Top Navigation -->
+                <nav class="navbar navbar-expand navbar-light bg-white shadow-sm">
+                    <div class="container-fluid px-4">
+                        <div class="navbar-collapse">
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-user-circle me-1"></i> Admin
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Hồ sơ</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Cài đặt</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                
+                <!-- Dashboard Content -->
+                <div class="container-fluid p-4" id="dashboardContent">
+                    <h3 class="mb-4">Dashboard</h3>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card dashboard-card bg-primary text-white p-3">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h5>Tổng bất động sản</h5>
+                                        <h2 class="stat-number" id="totalProperties">0</h2>
+                                    </div>
+                                    <i class="fas fa-home fa-3x opacity-50"></i>
+                                </div>
+                                <div class="mt-3">
+                                    <small><i class="fas fa-arrow-up me-1"></i> 5.2% so với tháng trước</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card dashboard-card bg-success text-white p-3">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h5>Nhà ở</h5>
+                                        <h2 class="stat-number" id="totalHouses">0</h2>
+                                    </div>
+                                    <i class="fas fa-house-user fa-3x opacity-50"></i>
+                                </div>
+                                <div class="mt-3">
+                                    <small><i class="fas fa-arrow-up me-1"></i> 3.8% so với tháng trước</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card dashboard-card bg-info text-white p-3">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h5>Văn phòng</h5>
+                                        <h2 class="stat-number" id="totalOffices">0</h2>
+                                    </div>
+                                    <i class="fas fa-building fa-3x opacity-50"></i>
+                                </div>
+                                <div class="mt-3">
+                                    <small><i class="fas fa-arrow-up me-1"></i> 7.5% so với tháng trước</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card dashboard-card bg-warning text-dark p-3">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h5>Người dùng</h5>
+                                        <h2 class="stat-number" id="totalUsers">0</h2>
+                                    </div>
+                                    <i class="fas fa-users fa-3x opacity-50"></i>
+                                </div>
+                                <div class="mt-3">
+                                    <small><i class="fas fa-arrow-up me-1"></i> 12.3% so với tháng trước</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0">Thống kê bất động sản</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="propertyChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0">Phân loại bất động sản</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="propertyTypeChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Bất động sản mới đăng</h5>
+                            <a href="#propertiesContent" class="btn btn-sm btn-outline-primary">Xem tất cả</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Ảnh</th>
+                                            <th>Tiêu đề</th>
+                                            <th>Loại</th>
+                                            <th>Giá</th>
+                                            <th>Địa điểm</th>
+                                            <th>Trạng thái</th>
+                                            <th>Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recentProperties">
+                                        <!-- Recent properties will be loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Properties Management Content -->
+                <div class="container-fluid p-4 d-none" id="propertiesContent">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3>Quản lý bất động sản</h3>
+                        <button class="btn btn-primary" id="addNewPropertyBtn">
+                            <i class="fas fa-plus me-2"></i>Thêm mới
+                        </button>
+                    </div>
+                    
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Danh sách bất động sản</h5>
+                            <div class="d-flex">
+                                <div class="input-group me-3" style="width: 250px;">
+                                    <input type="text" class="form-control" placeholder="Tìm kiếm..." id="propertySearch">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-filter me-1"></i>Lọc
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><h6 class="dropdown-header">Loại hình</h6></li>
+                                        <li><a class="dropdown-item" href="#">Tất cả</a></li>
+                                        <li><a class="dropdown-item" href="#">Nhà ở</a></li>
+                                        <li><a class="dropdown-item" href="#">Văn phòng</a></li>
+                                        <li><a class="dropdown-item" href="#">Căn hộ</a></li>
+                                        <li><a class="dropdown-item" href="#">Biệt thự</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><h6 class="dropdown-header">Trạng thái</h6></li>
+                                        <li><a class="dropdown-item" href="#">Có sẵn</a></li>
+                                        <li><a class="dropdown-item" href="#">Đã thuê</a></li>
+                                        <li><a class="dropdown-item" href="#">Bảo trì</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Ảnh</th>
+                                            <th>Tiêu đề</th>
+                                            <th>Loại</th>
+                                            <th>Giá</th>
+                                            <th>Địa điểm</th>
+                                            <th>Trạng thái</th>
+                                            <th>Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="allProperties">
+                                        <!-- All properties will be loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav aria-label="Page navigation" class="mt-4">
+                                <ul class="pagination justify-content-center" id="propertyPagination">
+                                    <!-- Pagination will be loaded here -->
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add/Edit Property Content -->
+                <div class="container-fluid p-4 d-none" id="addPropertyContent">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 id="propertyFormTitle">Thêm bất động sản mới</h3>
+                        <button class="btn btn-outline-secondary" id="backToPropertiesBtn">
+                            <i class="fas fa-arrow-left me-2"></i>Quay lại
+                        </button>
+                    </div>
+                    
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <form id="propertyForm">
+                                <input type="hidden" id="propertyId">
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <h5 class="mb-3">Thông tin cơ bản</h5>
+                                        <div class="mb-3">
+                                            <label for="propertyTitle" class="form-label">Tiêu đề <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="propertyTitle" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="propertyType" class="form-label">Loại hình <span class="text-danger">*</span></label>
+                                            <select class="form-select" id="propertyType" required>
+                                                <option value="">Chọn loại hình</option>
+                                                <option value="house">Nhà ở</option>
+                                                <option value="apartment">Căn hộ</option>
+                                                <option value="villa">Biệt thự</option>
+                                                <option value="office">Văn phòng</option>
+                                            </select>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="propertyPrice" class="form-label">Giá thuê (VNĐ/tháng) <span class="text-danger">*</span></label>
+                                                <input type="number" class="form-control" id="propertyPrice" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="propertyArea" class="form-label">Diện tích (m²) <span class="text-danger">*</span></label>
+                                                <input type="number" class="form-control" id="propertyArea" required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="propertyBedrooms" class="form-label">Số phòng ngủ</label>
+                                                <input type="number" class="form-control" id="propertyBedrooms" min="0">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="propertyBathrooms" class="form-label">Số phòng tắm <span class="text-danger">*</span></label>
+                                                <input type="number" class="form-control" id="propertyBathrooms" min="0" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="mb-3">Địa chỉ</h5>
+                                        <div class="mb-3">
+                                            <label for="propertyAddress" class="form-label">Địa chỉ chi tiết <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="propertyAddress" required>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="propertyDistrict" class="form-label">Quận/Huyện <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="propertyDistrict" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="propertyCity" class="form-label">Thành phố <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="propertyCity" required>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="propertyStatus" class="form-label">Trạng thái <span class="text-danger">*</span></label>
+                                            <select class="form-select" id="propertyStatus" required>
+                                                <option value="available">Có sẵn</option>
+                                                <option value="rented">Đã cho thuê</option>
+                                                <option value="maintenance">Bảo trì</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="featuredProperty" class="form-label">Nổi bật</label>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="featuredProperty">
+                                                <label class="form-check-label" for="featuredProperty">Hiển thị trên trang chủ</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h5 class="mb-3">Mô tả & Tiện ích</h5>
+                                    <div class="mb-3">
+                                        <label for="propertyDescription" class="form-label">Mô tả chi tiết <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="propertyDescription" rows="4" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Tiện ích</label>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="amenityWifi" value="wifi">
+                                                    <label class="form-check-label" for="amenityWifi">Wifi</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="amenityParking" value="parking">
+                                                    <label class="form-check-label" for="amenityParking">Chỗ đỗ xe</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="amenityAC" value="air-conditioner">
+                                                    <label class="form-check-label" for="amenityAC">Điều hòa</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="amenityTV" value="television">
+                                                    <label class="form-check-label" for="amenityTV">TV</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="amenityKitchen" value="kitchen">
+                                                    <label class="form-check-label" for="amenityKitchen">Bếp</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="amenityPool" value="pool">
+                                                    <label class="form-check-label" for="amenityPool">Hồ bơi</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="amenityGym" value="gym">
+                                                    <label class="form-check-label" for="amenityGym">Phòng gym</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="amenityGarden" value="garden">
+                                                    <label class="form-check-label" for="amenityGarden">Vườn</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h5 class="mb-3">Hình ảnh</h5>
+                                    <div class="mb-3">
+                                        <label for="propertyMainImage" class="form-label">Ảnh đại diện <span class="text-danger">*</span></label>
+                                        <input type="file" class="form-control" id="propertyMainImage" accept="image/*" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="propertyImages" class="form-label">Ảnh chi tiết (Tối đa 5 ảnh)</label>
+                                        <input type="file" class="form-control" id="propertyImages" multiple accept="image/*">
+                                    </div>
+                                    <div class="row" id="imagePreview">
+                                        <!-- Image preview will be shown here -->
+                                    </div>
+                                </div>
+                                
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-outline-secondary me-2" id="resetFormBtn">Nhập lại</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save me-2"></i>Lưu thông tin
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa bất động sản này? Hành động này không thể hoàn tác.</p>
+                    <input type="hidden" id="deletePropertyId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Go to homepage
+        $('#GotoHomePage').click(function() {
+            window.location.href = '/';
+        });  
+    </script>
+</body>
+</html>
